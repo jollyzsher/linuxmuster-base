@@ -373,15 +373,6 @@ export LANG" -i /etc/profile
 		fi
 	fi
 
-	# updating schulkonsole's db.conf
-	if grep -q ^"Username=ldap" /etc/linuxmuster/schulkonsole/db.conf; then
-		echo "Updating database configuration for linuxmuster-schulkonsole ..."
-		cp $STATICTPLDIR/etc/linuxmuster/schulkonsole/db.conf /etc/linuxmuster/schulkonsole/db.conf.obsolete
-		cp $STATICTPLDIR/etc/linuxmuster/schulkonsole/db.conf /etc/linuxmuster/schulkonsole
-		chown www-data:www-data /etc/linuxmuster/schulkonsole/db.conf*
-		chmod 600 /etc/linuxmuster/schulkonsole/db.conf*
-	fi
-
 	# repair admin accounts and groupmappings
 	$SCRIPTSDIR/repair-admins.sh
 
@@ -603,9 +594,9 @@ export LANG" -i /etc/profile
 	fi
 
 	# ldap db user needs password (1.4.36-paedml1)
-	if ! grep -q ^Username=ldap /etc/linuxmuster/schulkonsole/db.conf; then
+	if ! grep -q "02.11.2008" /etc/linuxmuster/schulkonsole/db.conf; then
 		echo "Providing a random password for postgresql user ldap."
-		echo "Warning: db.conf will be backupd up to db.conf.dpkg-old!"
+		echo "Warning: Backing up /etc/linuxmuster/schulkonsole/db.conf to db.conf.dpkg-old!"
 		cp /etc/linuxmuster/schulkonsole/db.conf /etc/linuxmuster/schulkonsole/db.conf.dpkg-old
 		ldapdbpw=`pwgen -s 8 1`
 		psql -U postgres -d template1 -qc "ALTER USER ldap WITH PASSWORD '"$ldapdbpw"';"
