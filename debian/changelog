@@ -4,9 +4,12 @@ linuxmuster-base (1.4.37-paedml1) unstable; urgency=low
   * repair-admins.sh: recreates now missing admin accounts, wwwadmin with samba
     account deactivated, removing obsolete wwwadmin group, adding wwwadmin to
     group administrators (544)
+  * removed repair-admins.sh from postinst and linuxmuster-setup
   * create-ssl-cert.sh: fixed wrong group for /etc/ssl/private, has changed from sasl to ssl-cert
+  * added moodle rule to postgres' pg_hba.conf (repairing during postinst)
+  * changed version to 4.0.2
 
- -- Thomas Schmitt <schmitt@lmz-bw.de>  Sun, 02 Nov 2008 15:50:47 +0100
+ -- Thomas Schmitt <schmitt@lmz-bw.de>  Tue, 04 Nov 2008 14:56:40 +0100
 
 linuxmuster-base (1.4.36-paedml1) unstable; urgency=low
 
